@@ -35,8 +35,45 @@ A lightweight C++ mathematics library for 2D/3D graphics, physics, and game deve
 ## Getting Started
 
 ### Installation
-Build it as a static library and use it in your project.
-A better cmake file will be added later
+
+1. **Install Dependencies**  
+   Make sure Python and pip are installed. Then install Meson and Ninja:
+
+   ```sh
+   pip install meson ninja
+   ```
+
+2. **Configure the Build Directory**  
+   If you're building the library only:
+
+   ```sh
+   meson setup build
+   ```
+
+   If you want to enable tests:
+
+   ```sh
+   meson wrap install catch2
+   meson setup build -Dbuild_tests=true
+   ```
+
+3. **Build the Library**
+
+   ```sh
+   meson compile -C build
+   ```
+
+4. **Run Tests (Optional)**
+
+   ```sh
+   meson test -C build
+   ```
+
+5. **Install the Library**
+
+   ```sh
+   meson install -C build
+   ```
 
 ### Usage
 ```cpp
@@ -53,6 +90,36 @@ tdm::Polar3 polar(5.0f, tdm::Radian(PI/4), tdm::Radian(PI/6));
 tdm::Vec3 cartesian = polar.toCartesian();
 ```
 
+## Integrating with Another Meson Project
+
+To use `tdm` as a subproject in your own Meson project:
+
+1. Create a `.wrap` file in your `subprojects/` folder named `tdm.wrap`:
+
+   ```ini
+   [wrap-git]
+   url = https://github.com/borankurut/tdm.git
+   revision = main
+
+   [provide]
+   tdm = tdm_dep
+   ```
+
+2. In your project's `meson.build` file, add:
+
+   ```meson
+   tdm_dep = dependency(
+     'tdm',
+     default_options: ['build_tests=false'],
+   )
+   ```
+
+3. Link the library in your targets:
+
+   ```meson
+   executable('my_app', 'main.cpp', dependencies: tdm_dep)
+   ```
+
 ## Roadmap
 
 ### Planned Features
@@ -60,4 +127,5 @@ tdm::Vec3 cartesian = polar.toCartesian();
 - **Geometric primitives**: Axis-Aligned Bounding Box (AABB), Ray, Plane
 - **Camera matrices**: `lookAt` view matrices and perspective projection matrices
 - **Calculus**
+
 

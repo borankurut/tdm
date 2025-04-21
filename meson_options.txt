@@ -1,0 +1,16 @@
+# meson_options.txt
+# Define whether to build/run examples
+option(
+  'build_examples',
+  type: 'boolean',
+  description: 'Build and install example binaries',
+  value: true,
+)
+
+# Define whether to build/run tests
+option(
+  'build_tests',
+  type: 'boolean',
+  description: 'Enable building Catch2‑based tests',
+  value: false,
+)

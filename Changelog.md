@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## Unversioned Changes
+### Build System
+**Changed**  
+- Replaced CMake with Meson build system  
+- Added Windows-compatible build configuration  
+
+---
+
 ## [v0.1.0] - Initial Release (Current)
 ### Core Implementation
 **Added**  
