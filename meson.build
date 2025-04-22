@@ -72,6 +72,7 @@ if get_option('build_tests')
     'tests/test_mat4.cpp',
     'tests/test_polar2.cpp',
     'tests/test_polar3.cpp',
+    'tests/test_quaternion.cpp',
     'tests/test_vectors.cpp',
   )
 
@@ -86,7 +87,7 @@ if get_option('build_tests')
   test(
     'math_tests',
     math_tests,
-    args: ['--reporter', 'compact'],
+    args: ['--reporter', 'console', '--durations=yes'],
   )
 endif
 

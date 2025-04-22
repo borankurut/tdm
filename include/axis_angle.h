@@ -9,7 +9,6 @@ namespace tdm
 class AxisAngle
 {
 public:
-    // todo: fix aliasing and axis should be unit vec.
     AxisAngle(const Vec3& axis, const Radian& angle)
     {
         m_axis = axis.normalized();

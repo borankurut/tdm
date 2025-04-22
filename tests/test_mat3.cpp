@@ -66,13 +66,13 @@ TEST_CASE("Mat3 Determinant", "[Mat3]")
 {
     {
         Mat3 A(1, 2, 3, 0, 0, 0, 7, 8, 9);
-        REQUIRE(tdm::abs(A.determinant() - (0.0f)) < EPSILON_6);
+        REQUIRE(fEqualE7(A.determinant(), (0.0f)));
     }
 
     {
         Mat3 B(342.0f, -42.0f, 53.0f, 11.9f, -31.57f, 0.05f, 99.0f, 21.0f, -3.0f);
         // Expected value calculated externally.
-        REQUIRE(tdm::abs(B.determinant() - (209216.90999f)) < EPSILON_6);
+        REQUIRE(fEqualE7(B.determinant(), (209216.90999f)));
     }
 }
 

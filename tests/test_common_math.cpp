@@ -3,7 +3,49 @@
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;
-using Catch::Approx;
+
+TEST_CASE("Equality Checks", "[Common]")
+{
+    SECTION("Equality Checks with Floats")
+    {
+        float base = 1.0f;
+
+        REQUIRE(fEqualE3(base, base + EPSILON_3 * 0.9f));
+        REQUIRE_FALSE(fEqualE3(base, base + EPSILON_3 * 1.1f));
+
+        REQUIRE(fEqualE4(base, base + EPSILON_4 * 0.9f));
+        REQUIRE_FALSE(fEqualE4(base, base + EPSILON_4 * 1.1f));
+
+        REQUIRE(fEqualE5(base, base + EPSILON_5 * 0.9f));
+        REQUIRE_FALSE(fEqualE5(base, base + EPSILON_5 * 1.1f));
+
+        REQUIRE(fEqualE6(base, base + EPSILON_6 * 0.9f));
+        REQUIRE_FALSE(fEqualE6(base, base + EPSILON_6 * 1.1f));
+
+        /* REQUIRE(fEqualE7(base, base + EPSILON_7 * 0.9f)); */
+        /* REQUIRE_FALSE(fEqualE7(base, base + EPSILON_7 * 1.1f)); */
+    }
+
+    SECTION("Equality Checks with Radians")
+    {
+        Radian base{1.0f};
+
+        REQUIRE(rEqualE3(base, Radian{base.valueRadians() + EPSILON_3 * 0.9f}));
+        REQUIRE_FALSE(rEqualE3(base, Radian{base.valueRadians() + EPSILON_3 * 1.1f}));
+
+        REQUIRE(rEqualE4(base, Radian{base.valueRadians() + EPSILON_4 * 0.9f}));
+        REQUIRE_FALSE(rEqualE4(base, Radian{base.valueRadians() + EPSILON_4 * 1.1f}));
+
+        REQUIRE(rEqualE5(base, Radian{base.valueRadians() + EPSILON_5 * 0.9f}));
+        REQUIRE_FALSE(rEqualE5(base, Radian{base.valueRadians() + EPSILON_5 * 1.1f}));
+
+        REQUIRE(rEqualE6(base, Radian{base.valueRadians() + EPSILON_6 * 0.9f}));
+        REQUIRE_FALSE(rEqualE6(base, Radian{base.valueRadians() + EPSILON_6 * 1.1f}));
+
+        /* REQUIRE(rEqualE7(base, Radian{base.valueRadians() + EPSILON_7 * 0.9f})); */
+        /* REQUIRE_FALSE(rEqualE7(base, Radian{base.valueRadians() + EPSILON_7 * 1.1f})); */
+    }
+}
 
 TEST_CASE("Angle Conversion", "[Common]")
 {
@@ -11,14 +53,14 @@ TEST_CASE("Angle Conversion", "[Common]")
     {
         Radian rad(PI);
         Degree deg(rad);
-        REQUIRE(deg.valueDegrees() == Approx(180.0f));
+        REQUIRE(fEqualE6(deg.valueDegrees(), 180.0f));
     }
 
     SECTION("Degree to Radian Conversion")
     {
         Degree deg(180.0f);
         Radian rad(deg);
-        REQUIRE(rad.valueRadians() == Approx(PI));
+        REQUIRE(fEqualE6(rad.valueRadians(), PI));
     }
 }
 
@@ -29,7 +71,8 @@ TEST_CASE("Assignment Operators", "[Common]")
         Degree d(90.0f);
         Radian r;
         r = d;
-        REQUIRE(r.valueRadians() == Approx(HALF_PI));
+
+        REQUIRE(fEqualE6(r.valueRadians(), HALF_PI));
     }
 
     SECTION("Degree Assignment from Radian")
@@ -37,21 +80,21 @@ TEST_CASE("Assignment Operators", "[Common]")
         Radian r(HALF_PI);
         Degree d;
         d = r;
-        REQUIRE(d.valueDegrees() == Approx(90.0f));
+        REQUIRE(fEqualE6(d.valueDegrees(), 90.0f));
     }
 
     SECTION("Radian Assignment from Float")
     {
         Radian r;
         r = 2.5f;
-        REQUIRE(r.valueRadians() == Approx(2.5f));
+        REQUIRE(fEqualE6(r.valueRadians(), 2.5f));
     }
 
     SECTION("Degree Assignment from Float")
     {
         Degree d;
         d = 45.0f;
-        REQUIRE(d.valueDegrees() == Approx(45.0f));
+        REQUIRE(fEqualE6(d.valueDegrees(), 45.0f));
     }
 }
 
@@ -64,49 +107,49 @@ TEST_CASE("Radian Operators", "[Common]")
     SECTION("Addition")
     {
         Radian r3 = r1 + r2;
-        REQUIRE(r3.valueRadians() == Approx(3.0f));
+        REQUIRE(fEqualE6(r3.valueRadians(), 3.0f));
         r3 = r1 + d;
-        REQUIRE(r3.valueRadians() == Approx(2.0f + PI));
+        REQUIRE(fEqualE6(r3.valueRadians(), (2.0f + PI)));
     }
 
     SECTION("Subtraction")
     {
         Radian r3 = r1 - r2;
-        REQUIRE(r3.valueRadians() == Approx(1.0f));
+        REQUIRE(fEqualE6(r3.valueRadians(), 1.0f));
         r3 = r1 - d;
-        REQUIRE(r3.valueRadians() == Approx(2.0f - PI));
+        REQUIRE(fEqualE6(r3.valueRadians(), (2.0f - PI)));
     }
 
     SECTION("Multiplication")
     {
         Radian r3 = r1 * 2.0f;
-        REQUIRE(r3.valueRadians() == Approx(4.0f));
+        REQUIRE(fEqualE6(r3.valueRadians(), 4.0f));
         r3 = r1 * r2;
-        REQUIRE(r3.valueRadians() == Approx(2.0f));
+        REQUIRE(fEqualE6(r3.valueRadians(), 2.0f));
         r3 = r1 * d; // 2.0f * PI
-        REQUIRE(r3.valueRadians() == Approx(2.0f * PI));
+        REQUIRE(fEqualE6(r3.valueRadians(), (2.0f * PI)));
     }
 
     SECTION("Division")
     {
         Radian r3 = r1 / 2.0f;
-        REQUIRE(r3.valueRadians() == Approx(1.0f));
+        REQUIRE(fEqualE6(r3.valueRadians(), 1.0f));
         r3 = r1 / r2;
-        REQUIRE(r3.valueRadians() == Approx(2.0f));
+        REQUIRE(fEqualE6(r3.valueRadians(), 2.0f));
         r3 = r1 / d; // 2.0f / PI
-        REQUIRE(r3.valueRadians() == Approx(2.0f / PI));
+        REQUIRE(fEqualE6(r3.valueRadians(), (2.0f / PI)));
     }
 
     SECTION("Compound Assignment")
     {
         r1 += r2;
-        REQUIRE(r1.valueRadians() == Approx(3.0f));
+        REQUIRE(fEqualE6(r1.valueRadians(), 3.0f));
         r1 -= r2;
-        REQUIRE(r1.valueRadians() == Approx(2.0f));
+        REQUIRE(fEqualE6(r1.valueRadians(), 2.0f));
         r1 *= 2.0f;
-        REQUIRE(r1.valueRadians() == Approx(4.0f));
+        REQUIRE(fEqualE6(r1.valueRadians(), 4.0f));
         r1 /= 2.0f;
-        REQUIRE(r1.valueRadians() == Approx(2.0f));
+        REQUIRE(fEqualE6(r1.valueRadians(), 2.0f));
     }
 }
 
@@ -119,29 +162,29 @@ TEST_CASE("Degree Operators", "[Common]")
     SECTION("Addition")
     {
         Degree d3 = d1 + d2;
-        REQUIRE(d3.valueDegrees() == Approx(135.0f));
+        REQUIRE(fEqualE6(d3.valueDegrees(), 135.0f));
         d3 = d1 + r;
-        REQUIRE(d3.valueDegrees() == Approx(180.0f));
+        REQUIRE(fEqualE6(d3.valueDegrees(), 180.0f));
     }
 
     SECTION("Subtraction")
     {
         Degree d3 = d1 - d2;
-        REQUIRE(d3.valueDegrees() == Approx(45.0f));
+        REQUIRE(fEqualE6(d3.valueDegrees(), 45.0f));
         d3 = d1 - r;
-        REQUIRE(d3.valueDegrees() == Approx(0.0f));
+        REQUIRE(fEqualE6(d3.valueDegrees(), 0.0f));
     }
 
     SECTION("Compound Assignment")
     {
         d1 += d2;
-        REQUIRE(d1.valueDegrees() == Approx(135.0f));
+        REQUIRE(fEqualE6(d1.valueDegrees(), 135.0f));
         d1 -= d2;
-        REQUIRE(d1.valueDegrees() == Approx(90.0f));
+        REQUIRE(fEqualE6(d1.valueDegrees(), 90.0f));
         d1 *= 2.0f;
-        REQUIRE(d1.valueDegrees() == Approx(180.0f));
+        REQUIRE(fEqualE6(d1.valueDegrees(), 180.0f));
         d1 /= 2.0f;
-        REQUIRE(d1.valueDegrees() == Approx(90.0f));
+        REQUIRE(fEqualE6(d1.valueDegrees(), 90.0f));
     }
 }
 
@@ -176,30 +219,30 @@ TEST_CASE("Trigonometric Functions", "[Common]")
     SECTION("Sine and Cosine")
     {
         Radian zero(0.0f);
-        REQUIRE(sin(zero) == Approx(0.0f));
-        REQUIRE(cos(zero) == Approx(1.0f));
+        REQUIRE(fEqualE6(sin(zero), 0.0f));
+        REQUIRE(fEqualE6(cos(zero), 1.0f));
 
         Radian half_pi(HALF_PI);
-        REQUIRE(sin(half_pi) == Approx(1.0f));
-        REQUIRE(cos(half_pi) == Approx(0.0f).margin(EPSILON_6));
+        REQUIRE(fEqualE6(sin(half_pi), 1.0f));
+        REQUIRE(fEqualE6(cos(half_pi), 0.0f));
     }
 
     SECTION("Arcsine and Arccosine")
     {
         Radian asin_pi_half = arcsin(1.0f);
-        REQUIRE(asin_pi_half.valueRadians() == Approx(HALF_PI));
+        REQUIRE(fEqualE6(asin_pi_half.valueRadians(), HALF_PI));
 
         Radian acos_zero = arccos(0.0f);
-        REQUIRE(acos_zero.valueRadians() == Approx(HALF_PI));
+        REQUIRE(fEqualE6(acos_zero.valueRadians(), HALF_PI));
     }
 
     SECTION("Arctangent")
     {
         Radian atan_zero = tdm::atan(0.0f);
-        REQUIRE(atan_zero.valueRadians() == Approx(0.0f));
+        REQUIRE(fEqualE6(atan_zero.valueRadians(), 0.0f));
 
         Radian atan2_origin = tdm::atan2(0.0f, 0.0f);
-        REQUIRE(atan2_origin.valueRadians() == Approx(0.0f));
+        REQUIRE(fEqualE6(atan2_origin.valueRadians(), 0.0f));
     }
 }
 
@@ -209,21 +252,21 @@ TEST_CASE("Helper Functions", "[Common]")
     {
         float a = 1.0f, b = 2.0f;
         swap(a, b);
-        REQUIRE(a == Approx(2.0f));
-        REQUIRE(b == Approx(1.0f));
+        REQUIRE(fEqualE6(a, 2.0f));
+        REQUIRE(fEqualE6(b, 1.0f));
     }
 
     SECTION("Floor and Ceil")
     {
-        REQUIRE(tdm::floor(1.9f) == Approx(1.0f));
-        REQUIRE(tdm::ceil(1.1f) == Approx(2.0f));
+        REQUIRE(fEqualE6(tdm::floor(1.9f), 1.0f));
+        REQUIRE(fEqualE6(tdm::ceil(1.1f), 2.0f));
     }
 
     SECTION("Square Root and Absolute")
     {
-        REQUIRE(tdm::sqrt(4.0f) == Approx(2.0f));
-        REQUIRE(tdm::abs(-5.0f) == Approx(5.0f));
-        REQUIRE(abs(Radian(-PI)) == Approx(PI));
+        REQUIRE(fEqualE6(tdm::sqrt(4.0f), 2.0f));
+        REQUIRE(fEqualE6(tdm::abs(-5.0f), 5.0f));
+        REQUIRE(fEqualE6(abs(Radian(-PI)), PI));
     }
 }
 

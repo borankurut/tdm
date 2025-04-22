@@ -15,9 +15,9 @@ TEST_CASE("Euler Canonicalization", "[Euler]")
         Radian bank(PI / 6.0f);
         Euler e(head, pitch, bank);
 
-        REQUIRE(tdm::abs(e.head().valueRadians() - head.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.pitch().valueRadians() - pitch.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.bank().valueRadians() - bank.valueRadians()) < EPSILON_6);
+        REQUIRE(rEqualE7(e.head(), head));
+        REQUIRE(rEqualE7(e.pitch(), pitch));
+        REQUIRE(rEqualE7(e.bank(), bank));
     }
 
     SECTION("Flip pitch when above HALF_PI")
@@ -31,9 +31,9 @@ TEST_CASE("Euler Canonicalization", "[Euler]")
         Radian expectedHead(wrapPi(Radian(0.0f + PI)));
         Radian expectedBank(wrapPi(Radian(0.0f + PI)));
 
-        REQUIRE(tdm::abs(e.pitch().valueRadians() - expectedPitch.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.head().valueRadians() - expectedHead.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.bank().valueRadians() - expectedBank.valueRadians()) < EPSILON_6);
+        REQUIRE(rEqualE7(e.pitch(), expectedPitch));
+        REQUIRE(rEqualE7(e.head(), expectedHead));
+        REQUIRE(rEqualE7(e.bank(), expectedBank));
     }
 
     SECTION("Flip pitch when below -HALF_PI")
@@ -47,9 +47,9 @@ TEST_CASE("Euler Canonicalization", "[Euler]")
         Radian expectedHead(wrapPi(Radian(0.0f + PI)));
         Radian expectedBank(wrapPi(Radian(0.0f + PI)));
 
-        REQUIRE(tdm::abs(e.pitch().valueRadians() - expectedPitch.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.head().valueRadians() - expectedHead.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.bank().valueRadians() - expectedBank.valueRadians()) < EPSILON_6);
+        REQUIRE(rEqualE7(e.pitch(), expectedPitch));
+        REQUIRE(rEqualE7(e.head(), expectedHead));
+        REQUIRE(rEqualE7(e.bank(), expectedBank));
     }
 
     SECTION("Gimbal lock handling (pitch at HALF_PI)")
@@ -62,8 +62,8 @@ TEST_CASE("Euler Canonicalization", "[Euler]")
         Radian expectedHead(wrapPi(Radian(0.0f + bank.valueRadians())));
         Radian expectedBank(0.0f);
 
-        REQUIRE(tdm::abs(e.head().valueRadians() - expectedHead.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.bank().valueRadians() - expectedBank.valueRadians()) < EPSILON_6);
-        REQUIRE(tdm::abs(e.pitch().valueRadians() - HALF_PI) < EPSILON_6);
+        REQUIRE(rEqualE7(e.pitch(), pitch));
+        REQUIRE(rEqualE7(e.head(), expectedHead));
+        REQUIRE(rEqualE7(e.bank(), expectedBank));
     }
 }

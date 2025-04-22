@@ -6,7 +6,6 @@
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;
-using Catch::Approx;
 
 const Vec2 v2a(1.0f, 2.0f);
 const Vec2 v2b(3.0f, 4.0f);
@@ -80,20 +79,20 @@ TEST_CASE("Vec2 Operations", "[Vec2]")
 
     SECTION("Vector Operations")
     {
-        SECTION("Dot Product") { REQUIRE(v2a.dot(v2b) == Approx(11.0f)); }
+        SECTION("Dot Product") { REQUIRE(fEqualE6(v2a.dot(v2b), (11.0f))); }
 
-        SECTION("Cross Product") { REQUIRE(v2a.cross(v2b) == Approx(-2.0f)); }
+        SECTION("Cross Product") { REQUIRE(fEqualE6(v2a.cross(v2b), (-2.0f))); }
 
         SECTION("Length")
         {
-            REQUIRE(v2a.length() == Approx(std::sqrt(5.0f)));
-            REQUIRE(v2a.lengthSquared() == Approx(5.0f));
+            REQUIRE(fEqualE6(v2a.length(), std::sqrt(5.0f)));
+            REQUIRE(fEqualE6(v2a.lengthSquared(), 5.0f));
         }
 
         SECTION("Normalization")
         {
             Vec2 norm = v2a.normalized();
-            REQUIRE(norm.length() == Approx(1.0f));
+            REQUIRE(fEqualE6(norm.length(), 1.0f));
             REQUIRE(norm == v2a / v2a.length());
         }
 
@@ -134,7 +133,7 @@ TEST_CASE("Vec3 Operations", "[Vec3]")
         SECTION("Normalization")
         {
             Vec3 norm = v3a.normalized();
-            REQUIRE(norm.length() == Approx(1.0f));
+            REQUIRE(fEqualE6(norm.length(), 1.0f));
         }
     }
 
@@ -171,7 +170,7 @@ TEST_CASE("Vec4 Operations", "[Vec4]")
     SECTION("Normalization")
     {
         Vec4 norm = v4a.normalized();
-        REQUIRE(norm.length() == Approx(1.0f));
+        REQUIRE(fEqualE6(norm.length(), 1.0f));
         REQUIRE(norm == v4a / v4a.length());
     }
 }

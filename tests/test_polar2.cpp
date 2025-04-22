@@ -3,7 +3,6 @@
 #include "polar2.h"
 #include "vec2.h"
 #include <catch2/catch_all.hpp>
-#include <cmath>
 
 using namespace tdm;
 
@@ -14,8 +13,8 @@ TEST_CASE("Polar2 Basic Functionality", "[Polar2]")
         Radian angle = Radian(PI / 4.0f);
         float radius = 5.0f;
         Polar2 p(radius, angle);
-        REQUIRE(tdm::abs(p.r() - radius) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(p.h() - angle) < tdm::EPSILON_6);
+        REQUIRE(fEqualE6(p.r(), radius));
+        REQUIRE(rEqualE6(p.h(), angle));
     }
 
     SECTION("Convert to Cartesian")
@@ -27,8 +26,8 @@ TEST_CASE("Polar2 Basic Functionality", "[Polar2]")
 
         float expectedX = radius * tdm::cos(angle);
         float expectedY = radius * tdm::sin(angle);
-        REQUIRE(tdm::abs(cart.x() - expectedX) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(cart.y() - expectedY) < tdm::EPSILON_6);
+        REQUIRE(fEqualE6(cart.x(), expectedX));
+        REQUIRE(fEqualE6(cart.y(), expectedY));
     }
 
     SECTION("Construct from Cartesian")
@@ -38,7 +37,7 @@ TEST_CASE("Polar2 Basic Functionality", "[Polar2]")
 
         float expectedRadius = tdm::sqrt(3.0f * 3.0f + 3.0f * 3.0f);
         Radian expectedAngle = Radian(tdm::atan2(3.0f, 3.0f));
-        REQUIRE(tdm::abs(p.r() - expectedRadius) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(p.h() - expectedAngle) < tdm::EPSILON_6);
+        REQUIRE(fEqualE6(p.r(), expectedRadius));
+        REQUIRE(rEqualE6(p.h(), expectedAngle));
     }
 }

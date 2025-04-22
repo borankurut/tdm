@@ -101,9 +101,9 @@ public:
     // comparators
     bool operator==(const Vec3& other) const
     {
-        return tdm::abs(entries[0] - other.entries[0]) < EPSILON_6 &&
-               tdm::abs(entries[1] - other.entries[1]) < EPSILON_6 &&
-               tdm::abs(entries[2] - other.entries[2]) < EPSILON_6;
+
+        return fEqualE6(entries[0], other.entries[0]) && fEqualE6(entries[1], other.entries[1]) &&
+               fEqualE6(entries[2], other.entries[2]);
     }
 
     bool operator!=(const Vec3& other) const { return !(*this == other); }
@@ -131,11 +131,13 @@ public:
         return (entries[0] * entries[0] + entries[1] * entries[1] + entries[2] * entries[2]);
     }
 
+    bool isUnit() const { return fEqualE5(lengthSquared(), 1.0f); }
+
     Vec3 normalized() const
     {
         float len = length();
 
-        if (abs(len - 0.0f) < EPSILON_6)
+        if (fEqualE6(len, 0.0f))
             return *this;
 
         return (*this / len);

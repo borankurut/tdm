@@ -16,9 +16,9 @@ TEST_CASE("Polar3 Basic Functionality", "[Polar3]")
         Radian pitch = Radian(PI / 6.0f);
         Polar3 p(radius, heading, pitch);
 
-        REQUIRE(tdm::abs(p.r() - radius) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(p.h() - heading) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(p.p() - pitch) < tdm::EPSILON_6);
+        REQUIRE(fEqualE6(p.r(), radius));
+        REQUIRE(rEqualE6(p.h(), heading));
+        REQUIRE(rEqualE6(p.p(), pitch));
     }
 
     SECTION("Convert to Cartesian")
@@ -33,9 +33,9 @@ TEST_CASE("Polar3 Basic Functionality", "[Polar3]")
         float expectedY = -radius * sin(pitch.valueRadians());
         float expectedZ = radius * cos(pitch.valueRadians()) * cos(heading.valueRadians());
 
-        REQUIRE(tdm::abs(cart.x() - expectedX) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(cart.y() - expectedY) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(cart.z() - expectedZ) < tdm::EPSILON_6);
+        REQUIRE(fEqualE6(cart.x(), expectedX));
+        REQUIRE(fEqualE6(cart.y(), expectedY));
+        REQUIRE(fEqualE6(cart.z(), expectedZ));
     }
 
     SECTION("Construct from Cartesian")
@@ -51,8 +51,8 @@ TEST_CASE("Polar3 Basic Functionality", "[Polar3]")
 
         Polar3 p(cart);
 
-        REQUIRE(tdm::abs(p.r() - radius) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(p.h() - heading) < tdm::EPSILON_6);
-        REQUIRE(tdm::abs(p.p() - pitch) < tdm::EPSILON_6);
+        REQUIRE(fEqualE6(p.r(), radius));
+        REQUIRE(rEqualE6(p.h(), heading));
+        REQUIRE(rEqualE6(p.p(), pitch));
     }
 }

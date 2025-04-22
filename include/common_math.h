@@ -70,6 +70,7 @@ public:
 
     // *
     Radian operator*(float f) const { return Radian(m_value * f); }
+    friend Radian operator*(float f, const Radian& radian) { return Radian(radian.m_value * f); }
     Radian operator*(const Radian& radian) const { return Radian(m_value * radian.m_value); }
     Radian operator*(const Degree& degree) const;
     Radian& operator*=(float f)
@@ -86,6 +87,7 @@ public:
 
     // /
     Radian operator/(float f) const { return Radian(m_value / f); }
+    friend Radian operator/(float f, const Radian& radian) { return Radian(f / radian.m_value); }
     Radian operator/(const Radian& radian) const { return Radian(m_value / radian.m_value); }
     Radian operator/(const Degree& degree) const;
     Radian& operator/=(float f)
@@ -95,7 +97,7 @@ public:
     }
     Radian& operator/=(const Radian& radian)
     {
-        m_value *= radian.m_value;
+        m_value /= radian.m_value;
         return *this;
     }
     Radian& operator/=(const Degree& degree);
@@ -293,5 +295,17 @@ inline float wrapPi(float theta)
 }
 
 inline Radian wrapPi(Radian theta) { return Radian(wrapPi(theta.valueRadians())); }
+
+inline bool fEqualE3(float x, float y) { return abs(x - y) < EPSILON_3; }
+inline bool fEqualE4(float x, float y) { return abs(x - y) < EPSILON_4; }
+inline bool fEqualE5(float x, float y) { return abs(x - y) < EPSILON_5; }
+inline bool fEqualE6(float x, float y) { return abs(x - y) < EPSILON_6; }
+inline bool fEqualE7(float x, float y) { return abs(x - y) < EPSILON_7; }
+
+inline bool rEqualE3(const Radian& x, const Radian& y) { return abs(x.valueRadians() - y.valueRadians()) < EPSILON_3; }
+inline bool rEqualE4(const Radian& x, const Radian& y) { return abs(x.valueRadians() - y.valueRadians()) < EPSILON_4; }
+inline bool rEqualE5(const Radian& x, const Radian& y) { return abs(x.valueRadians() - y.valueRadians()) < EPSILON_5; }
+inline bool rEqualE6(const Radian& x, const Radian& y) { return abs(x.valueRadians() - y.valueRadians()) < EPSILON_6; }
+inline bool rEqualE7(const Radian& x, const Radian& y) { return abs(x.valueRadians() - y.valueRadians()) < EPSILON_7; }
 
 } // namespace tdm

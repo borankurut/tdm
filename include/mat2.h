@@ -69,8 +69,8 @@ public:
     // comparators
     bool operator==(const Mat2& other) const
     {
-        return tdm::abs(m[0] - other.m[0]) < EPSILON_6 && tdm::abs(m[1] - other.m[1]) < EPSILON_6 &&
-               tdm::abs(m[2] - other.m[2]) < EPSILON_6 && tdm::abs(m[3] - other.m[3]) < EPSILON_6;
+        return fEqualE6(m[0], other.m[0]) && fEqualE6(m[1], other.m[1]) && fEqualE6(m[2], other.m[2]) &&
+               fEqualE6(m[3], other.m[3]);
     }
     bool operator!=(const Mat2& other) const { return !(*this == other); }
 
@@ -101,7 +101,7 @@ public:
     Mat2 inverse() const
     {
         float det = determinant();
-        if (tdm::abs(det - 0.0f) < EPSILON_6)
+        if (fEqualE6(det, 0.0f))
         {
             return Mat2::Zero;
         }

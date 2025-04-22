@@ -44,11 +44,9 @@ Mat3 Mat3::operator/(float scalar) const
 
 bool Mat3::operator==(const Mat3& rhs) const
 {
-    return tdm::abs(m[0] - rhs.m[0]) < EPSILON_6 && tdm::abs(m[1] - rhs.m[1]) < EPSILON_6 &&
-           tdm::abs(m[2] - rhs.m[2]) < EPSILON_6 && tdm::abs(m[3] - rhs.m[3]) < EPSILON_6 &&
-           tdm::abs(m[4] - rhs.m[4]) < EPSILON_6 && tdm::abs(m[5] - rhs.m[5]) < EPSILON_6 &&
-           tdm::abs(m[6] - rhs.m[6]) < EPSILON_6 && tdm::abs(m[7] - rhs.m[7]) < EPSILON_6 &&
-           tdm::abs(m[8] - rhs.m[8]) < EPSILON_6;
+    return fEqualE6(m[0], rhs.m[0]) && fEqualE6(m[1], rhs.m[1]) && fEqualE6(m[2], rhs.m[2]) &&
+           fEqualE6(m[3], rhs.m[3]) && fEqualE6(m[4], rhs.m[4]) && fEqualE6(m[5], rhs.m[5]) &&
+           fEqualE6(m[6], rhs.m[6]) && fEqualE6(m[7], rhs.m[7]);
 }
 
 Mat3 Mat3::inverse() const
@@ -66,7 +64,7 @@ Mat3 Mat3::inverse() const
 
     float det = m[0] * mInv[0] + m[1] * mInv[3] + m[2] * mInv[6];
 
-    if (tdm::abs(det - 0.0f) < EPSILON_6)
+    if (fEqualE6(det, 0.0f))
         return Mat3::Zero;
 
     float invDet = 1.0f / det;
@@ -92,9 +90,8 @@ bool Mat3::isOrthogonal() const
     float r1r2 = r1.dot(r2);
     float r2r2 = r2.dot(r2);
 
-    return tdm::abs(r0r0 - 1.0f) < EPSILON_6 && tdm::abs(r1r1 - 1.0f) < EPSILON_6 &&
-           tdm::abs(r2r2 - 1.0f) < EPSILON_6 && tdm::abs(r0r1 - 0.0f) < EPSILON_6 &&
-           tdm::abs(r0r2 - 0.0f) < EPSILON_6 && tdm::abs(r1r2 - 0.0f) < EPSILON_6;
+    return fEqualE6(r0r0, 1.0f) && fEqualE6(r0r1, 0.0f) && fEqualE6(r0r2, 0.0f) && fEqualE6(r1r1, 1.0f) &&
+           fEqualE6(r1r2, 0.0f) && fEqualE6(r2r2, 1.0f);
 }
 
 } // namespace tdm

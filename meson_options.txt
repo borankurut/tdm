@@ -4,7 +4,7 @@ option(
   'build_examples',
   type: 'boolean',
   description: 'Build and install example binaries',
-  value: true,
+  value: false,
 )
 
 # Define whether to build/run tests

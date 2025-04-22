@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 ---
 
 ## Unversioned Changes
+
+### Core Implementation
+
+**Added**
+- **Quaternions**
+  - Arithmetic operations, normalization, dot product
+  - Exponent(pow) function and Slerp function
+
+- **Equality Checks**
+  - Float and Radian equality check functions with different epsilon values
+
 ### Build System
 **Changed**  
 - Replaced CMake with Meson build system  

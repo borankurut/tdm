@@ -5,7 +5,6 @@
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;
-using Catch::Approx;
 
 TEST_CASE("Mat2 Constructors", "[Mat2]")
 {
@@ -65,7 +64,7 @@ TEST_CASE("Mat2 Transpose", "[Mat2]")
 TEST_CASE("Mat2 Determinant", "[Mat2]")
 {
     Mat2 A(1, 2, 3, 4);
-    REQUIRE(A.determinant() == Approx(-2.0f));
+    REQUIRE(fEqualE6(A.determinant(), -2.0f));
 }
 
 TEST_CASE("Mat2 Inverse", "[Mat2]")

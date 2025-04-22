@@ -56,14 +56,12 @@ Mat4 Mat4::operator/(float scalar) const
 
 bool Mat4::operator==(const Mat4& rhs) const
 {
-    return tdm::abs(m[0] - rhs.m[0]) < EPSILON_6 && tdm::abs(m[1] - rhs.m[1]) < EPSILON_6 &&
-           tdm::abs(m[2] - rhs.m[2]) < EPSILON_6 && tdm::abs(m[3] - rhs.m[3]) < EPSILON_6 &&
-           tdm::abs(m[4] - rhs.m[4]) < EPSILON_6 && tdm::abs(m[5] - rhs.m[5]) < EPSILON_6 &&
-           tdm::abs(m[6] - rhs.m[6]) < EPSILON_6 && tdm::abs(m[7] - rhs.m[7]) < EPSILON_6 &&
-           tdm::abs(m[8] - rhs.m[8]) < EPSILON_6 && tdm::abs(m[9] - rhs.m[9]) < EPSILON_6 &&
-           tdm::abs(m[10] - rhs.m[10]) < EPSILON_6 && tdm::abs(m[11] - rhs.m[11]) < EPSILON_6 &&
-           tdm::abs(m[12] - rhs.m[12]) < EPSILON_6 && tdm::abs(m[13] - rhs.m[13]) < EPSILON_6 &&
-           tdm::abs(m[14] - rhs.m[14]) < EPSILON_6 && tdm::abs(m[15] - rhs.m[15]) < EPSILON_6;
+    return fEqualE6(m[0], rhs.m[0]) && fEqualE6(m[1], rhs.m[1]) && fEqualE6(m[2], rhs.m[2]) &&
+           fEqualE6(m[3], rhs.m[3]) && fEqualE6(m[4], rhs.m[4]) && fEqualE6(m[5], rhs.m[5]) &&
+           fEqualE6(m[6], rhs.m[6]) && fEqualE6(m[7], rhs.m[7]) && fEqualE6(m[8], rhs.m[8]) &&
+           fEqualE6(m[9], rhs.m[9]) && fEqualE6(m[10], rhs.m[10]) && fEqualE6(m[11], rhs.m[11]) &&
+           fEqualE6(m[12], rhs.m[12]) && fEqualE6(m[13], rhs.m[13]) && fEqualE6(m[14], rhs.m[14]) &&
+           fEqualE6(m[15], rhs.m[15]);
 }
 
 float Mat4::minor(int r_0, int r_1, int r_2, int c_0, int c_1, int c_2) const
@@ -95,7 +93,7 @@ Mat4 Mat4::inverse() const
 
     float det = m[0] * mInv[0] + m[1] * mInv[4] + m[2] * mInv[8] + m[3] * mInv[12];
 
-    if (tdm::abs(det - 0.0f) < EPSILON_6)
+    if (fEqualE6(det, 0.0f))
         return Mat4::Zero;
 
     float invDet = 1.0f / det;
