@@ -194,8 +194,8 @@ public:
     Mat4 getAdj() const;
 
     // special matrices
-    static Mat4 Zero;
-    static Mat4 Identity;
+    static const Mat4 Zero;
+    static const Mat4 Identity;
 
 private:
     float m[16];

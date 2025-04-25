@@ -184,8 +184,8 @@ public:
     static Mat3 reflection(const Vec3& vec) { return scaleArbitrary(vec, -1.0f); }
 
     // special matrices
-    static Mat3 Zero;
-    static Mat3 Identity;
+    static const Mat3 Zero;
+    static const Mat3 Identity;
 
 private:
     float m[9];

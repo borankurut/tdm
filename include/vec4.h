@@ -204,14 +204,14 @@ public:
         return os;
     }
 
-    static Vec4 Zero;
+    static const Vec4 Zero;
 
-    static Vec4 Right;
-    static Vec4 Left;
-    static Vec4 Up;
-    static Vec4 Down;
-    static Vec4 Forward;
-    static Vec4 Backward;
+    static const Vec4 Right;
+    static const Vec4 Left;
+    static const Vec4 Up;
+    static const Vec4 Down;
+    static const Vec4 Forward;
+    static const Vec4 Backward;
 };
 
 } // namespace tdm

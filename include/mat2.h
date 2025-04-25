@@ -143,8 +143,8 @@ public:
     }
 
     // special matrices
-    static Mat2 Zero;
-    static Mat2 Identity;
+    static const Mat2 Zero;
+    static const Mat2 Identity;
 
 private:
     float m[4];

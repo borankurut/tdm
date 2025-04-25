@@ -1,8 +1,11 @@
 #pragma once
+
 #include "mat3.h"
 
 namespace tdm
 {
+class Euler;
+class Quaternion;
 
 class OrientationMatrix
 {
@@ -21,6 +24,17 @@ public:
         assert(m_toUprightSpace.isOrthogonal());
     }
 
+    OrientationMatrix& operator=(const OrientationMatrix& other)
+    {
+        this->m_toUprightSpace = other.m_toUprightSpace;
+        return *this;
+    }
+
+    bool operator==(const OrientationMatrix& other) const { return this->m_toUprightSpace == other.m_toUprightSpace; }
+
+    OrientationMatrix(const Euler& euler);
+    OrientationMatrix(const Quaternion& quaternion);
+
     void convertToUprightSpace(Vec3& vec) const { vec = vec * m_toUprightSpace; }
     void convertToObjectSpace(Vec3& vec) const { vec = vec * m_toUprightSpace.transpose(); }
 
@@ -32,6 +46,11 @@ public:
 
     Mat3 getToUprightSpace() const { return m_toUprightSpace; }
     Mat3 getToObjectSpace() const { return m_toUprightSpace.transpose(); }
+
+    Euler toEuler() const;
+    Quaternion toQuaternion() const;
+
+    static const OrientationMatrix Identity;
 
 private:
     Mat3 m_toUprightSpace;

@@ -177,14 +177,14 @@ public:
         return os;
     }
 
-    static Vec3 Zero;
+    static const Vec3 Zero;
 
-    static Vec3 Right;
-    static Vec3 Left;
-    static Vec3 Up;
-    static Vec3 Down;
-    static Vec3 Forward;
-    static Vec3 Backward;
+    static const Vec3 Right;
+    static const Vec3 Left;
+    static const Vec3 Up;
+    static const Vec3 Down;
+    static const Vec3 Forward;
+    static const Vec3 Backward;
 };
 
 } // namespace tdm

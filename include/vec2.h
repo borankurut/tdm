@@ -152,11 +152,11 @@ public:
         return os;
     }
 
-    static Vec2 Zero;
-    static Vec2 Right;
-    static Vec2 Left;
-    static Vec2 Up;
-    static Vec2 Down;
+    static const Vec2 Zero;
+    static const Vec2 Right;
+    static const Vec2 Left;
+    static const Vec2 Up;
+    static const Vec2 Down;
 };
 
 } // namespace tdm

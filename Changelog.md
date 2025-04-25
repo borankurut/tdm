@@ -5,13 +5,20 @@ All notable changes to this project will be documented in this file.
 ---
 
 ## Unversioned Changes
-
 ### Core Implementation
-
 **Added**
+- **Orientation**
+    - Conversions between orientation types: Orientation Matrix(Mat3)-Quaternion-Euler
+    - Catch2 test for orientations
+
+- **Orientation Matrix**
+  - Constructors with matrix, quaternion, euler types.
+
 - **Quaternions**
   - Arithmetic operations, normalization, dot product
   - Exponent(pow) function and Slerp function
+  - Static constant Identity quaternion
+  - Catch2 test for quaternion
 
 - **Equality Checks**
   - Float and Radian equality check functions with different epsilon values

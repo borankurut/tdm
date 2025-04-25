@@ -3,9 +3,9 @@
 namespace tdm
 {
 
-Mat3 Mat3::Zero = Mat3{0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+const Mat3 Mat3::Zero = Mat3{0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
-Mat3 Mat3::Identity = Mat3{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+const Mat3 Mat3::Identity = Mat3{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
 
 Mat3 Mat3::operator*(const Mat3& other) const
 {

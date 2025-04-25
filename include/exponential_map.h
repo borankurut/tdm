@@ -19,9 +19,9 @@ public:
 
     Vec3 getE() const { return m_e; }
 
-    Vec3 getAxis() const { return m_e.normalized(); }
+    Vec3 axis() const { return m_e.normalized(); }
 
-    Radian getAngle() const { return Radian(m_e.length()); }
+    Radian angle() const { return Radian(m_e.length()); }
 
 private:
     Vec3 m_e;

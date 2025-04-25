@@ -15,12 +15,14 @@ A lightweight C++ mathematics library for 2D/3D graphics, physics, and game deve
   - Polar coordinates (`Polar2`, `Polar3`) with canonicalization
   - Euler angles with gimbal lock handling
 - **Angles**: `Radian`/`Degree` conversions and arithmetic
-- **Quaternions (only rotation)**: Basic type definition (WIP)
+- **Quaternions (only rotation)**: Arithmetic operations
+- **Orientation matrices**: Matrices for object -> upright conversions and fast inverse using transpose
 
 ### Features
 - Robust canonicalization for angles and polar coordinates
 - Efficient matrix inversion via adjugate/cofactors
 - Edge-case handling (zero vectors, singular matrices)
+- Orientations and conversions (Euler, Quaternion, Matrix)
 
 ### Testing
 - Test coverage with Catch2
@@ -31,6 +33,8 @@ A lightweight C++ mathematics library for 2D/3D graphics, physics, and game deve
   - Angle wrapping and conversions
   - Polar ↔  Cartesian coordinate conversions
   - Euler angles operations
+  - Quaternion operations
+  - Orientation matrix operations
 
 ## Getting Started
 
@@ -47,7 +51,7 @@ A lightweight C++ mathematics library for 2D/3D graphics, physics, and game deve
    If you're building the library only:
 
    ```sh
-   meson setup build
+   meson setup build -Dbuild_examples=true
    ```
 
    If you want to enable tests:
@@ -67,12 +71,6 @@ A lightweight C++ mathematics library for 2D/3D graphics, physics, and game deve
 
    ```sh
    meson test -C build
-   ```
-
-5. **Install the Library**
-
-   ```sh
-   meson install -C build
    ```
 
 ### Usage
@@ -110,7 +108,7 @@ To use `tdm` as a subproject in your own Meson project:
    ```meson
    tdm_dep = dependency(
      'tdm',
-     default_options: ['build_tests=false'],
+     default_options: ['build_tests=false', 'build_examples=false'],
    )
    ```
 
@@ -123,9 +121,7 @@ To use `tdm` as a subproject in your own Meson project:
 ## Roadmap
 
 ### Planned Features
-- **Quaternion operations**: SLERP, conjugation, and conversion to/from matrices
 - **Geometric primitives**: Axis-Aligned Bounding Box (AABB), Ray, Plane
 - **Camera matrices**: `lookAt` view matrices and perspective projection matrices
 - **Calculus**
-
 

@@ -155,22 +155,22 @@ public:
     }
     static Quaternion slerp(const Quaternion& q0, const Quaternion& q1, float t);
 
-    float getW() const { return m_w; }
-    float getX() const { return m_x; }
-    float getY() const { return m_y; }
-    float getZ() const { return m_z; }
+    float w() const { return m_w; }
+    float x() const { return m_x; }
+    float y() const { return m_y; }
+    float z() const { return m_z; }
 
-    Radian getAlpha() const
+    Radian alpha() const
     {
         float cosA = m_w;
         float sinA = Vec3(m_x, m_y, m_z).length();
         return atan2(sinA, cosA);
     }
-    Radian getTheta() const { return 2.0f * getAlpha(); }
+    Radian theta() const { return 2.0f * alpha(); }
 
-    Vec3 getAxisN() const { return Vec3(m_x, m_y, m_z).normalized(); }
+    Vec3 axisN() const { return Vec3(m_x, m_y, m_z).normalized(); }
 
-    static Quaternion Identity;
+    static const Quaternion Identity;
 
 private:
     float m_w;

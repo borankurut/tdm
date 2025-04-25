@@ -3,7 +3,7 @@
 namespace tdm
 {
 
-Quaternion Quaternion::Identity = Quaternion(1.0f, 0.0f, 0.0f, 0.0f);
+const Quaternion Quaternion::Identity = Quaternion(1.0f, 0.0f, 0.0f, 0.0f);
 
 Quaternion Quaternion::slerp(const Quaternion& q0, const Quaternion& q1, float t)
 {
