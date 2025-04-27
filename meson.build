@@ -24,6 +24,7 @@ endif
 inc = include_directories('include')
 
 # ——— Main library ——————————————————————————
+pch_file = files('src/pch.cpp') # added seperately for formatting issues
 lib_sources = files(
   'src/euler.cpp',
   'src/mat2.cpp',
@@ -40,7 +41,7 @@ lib_sources = files(
 
 math_lib = static_library(
   'math',
-  lib_sources,
+  [pch_file, lib_sources],
   include_directories: inc,
   install: false, # we don’t install the static library by default
 )

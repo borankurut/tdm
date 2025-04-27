@@ -1,6 +1,6 @@
 // test_euler.cpp
-#include "common_math.h"
-#include "euler.h"
+
+#include "pch.h"
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;

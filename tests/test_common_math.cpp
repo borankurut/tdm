@@ -1,5 +1,6 @@
 // test_common_math.cpp
-#include "common_math.h"
+
+#include "pch.h"
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;

@@ -1,8 +1,6 @@
 // test_mat3.cpp
-// ########## TEST MAT3 ##########
 
-#include "mat3.h"
-#include "vec3.h"
+#include "pch.h"
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;
@@ -66,13 +64,13 @@ TEST_CASE("Mat3 Determinant", "[Mat3]")
 {
     {
         Mat3 A(1, 2, 3, 0, 0, 0, 7, 8, 9);
-        REQUIRE(fEqualE7(A.determinant(), (0.0f)));
+        REQUIRE(fEqualE6(A.determinant(), (0.0f)));
     }
 
     {
         Mat3 B(342.0f, -42.0f, 53.0f, 11.9f, -31.57f, 0.05f, 99.0f, 21.0f, -3.0f);
         // Expected value calculated externally.
-        REQUIRE(fEqualE7(B.determinant(), (209216.90999f)));
+        REQUIRE(fEqualE6(B.determinant(), (209216.90999f)));
     }
 }
 

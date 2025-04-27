@@ -1,9 +1,7 @@
 // test_polar3.cpp
-#include "common_math.h"
-#include "polar3.h"
-#include "vec3.h"
+
+#include "pch.h"
 #include <catch2/catch_all.hpp>
-#include <cmath>
 
 using namespace tdm;
 

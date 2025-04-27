@@ -1,4 +1,4 @@
-#include "euler.h"
+#include "pch.h"
 
 namespace tdm
 {
@@ -31,7 +31,7 @@ void Euler::makeCanonical()
     }
 
     // Handle gimbal lock: when pitch is nearly ±HALF_PI, bank is redundant.
-    if (fEqualE7(m_pitch.valueRadians(), HALF_PI))
+    if (fEqualE6(m_pitch.valueRadians(), HALF_PI))
     {
         // Absorb bank into head and zero out bank.
         m_head = wrapPi(Radian(m_head.valueRadians() + m_bank.valueRadians()));

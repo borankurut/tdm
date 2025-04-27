@@ -1,7 +1,6 @@
 // test_mat2.cpp
-// ########## TEST MAT2 ##########
 
-#include "mat2.h"
+#include "pch.h"
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;

@@ -1,10 +1,6 @@
 // test_mat4.cpp
-// ########## TEST MAT4 ##########
 
-#include "common_math.h"
-#include "mat4.h"
-#include "vec3.h"
-#include "vec4.h"
+#include "pch.h"
 #include <catch2/catch_test_macros.hpp>
 
 using namespace tdm;

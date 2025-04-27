@@ -1,8 +1,6 @@
 // test_quaternion.cpp
-#include "axis_angle.h"
-#include "common_math.h"
-#include "quaternion.h"
-#include "vec3.h"
+
+#include "pch.h"
 #include <catch2/catch_test_macros.hpp>
 
 using namespace tdm;

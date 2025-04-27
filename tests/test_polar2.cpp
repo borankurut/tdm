@@ -1,7 +1,6 @@
 // test_polar2.cpp
-#include "common_math.h"
-#include "polar2.h"
-#include "vec2.h"
+
+#include "pch.h"
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;

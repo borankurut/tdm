@@ -1,8 +1,6 @@
 // test_vectors.cpp
-// ########## TEST VECTORS ##########
-#include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
+
+#include "pch.h"
 #include <catch2/catch_all.hpp>
 
 using namespace tdm;
